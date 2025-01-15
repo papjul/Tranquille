@@ -142,7 +142,7 @@ public class NumberInfoService {
             return NumberInfo.BlockingReason.SIA_RATING;
         }
 
-        if (numberInfo.blacklistItem != null && settings.getBlockBlacklisted()
+        if (numberInfo.blacklistItem != null && settings.getBlockDenylisted()
                 && canBlock(NumberInfo.BlockingReason.BLACKLISTED)) {
             return NumberInfo.BlockingReason.BLACKLISTED;
         }

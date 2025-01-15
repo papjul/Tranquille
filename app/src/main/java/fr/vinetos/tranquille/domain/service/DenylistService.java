@@ -51,16 +51,16 @@ public class DenylistService {
             String finalName = name;
             String cleanedPattern = pattern;
             BuildersKt.runBlocking(
-                    EmptyCoroutineContext.INSTANCE,
-                    (scope, continuation) -> denylistDataSource.save(new DenylistItem(
-                            -1,
-                            finalName,
-                            cleanedPattern,
-                            new Date().toString(),
-                            0,
-                            0,
-                            null
-                    ), continuation)
+                EmptyCoroutineContext.INSTANCE,
+                (scope, continuation) -> denylistDataSource.save(new DenylistItem(
+                    -1,
+                    finalName,
+                    cleanedPattern,
+                    new Date(),
+                    false,
+                    0,
+                    null
+                ), continuation)
             );
             blacklistChanged(false);
         } catch (InterruptedException e) {
@@ -74,8 +74,8 @@ public class DenylistService {
         sanitize(denylistItem);
         try {
             BuildersKt.runBlocking(
-                    EmptyCoroutineContext.INSTANCE,
-                    (scope, continuation) -> denylistDataSource.update(denylistItem, continuation)
+                EmptyCoroutineContext.INSTANCE,
+                (scope, continuation) -> denylistDataSource.update(denylistItem, continuation)
             );
             blacklistChanged(true);
         } catch (InterruptedException e) {
@@ -88,8 +88,8 @@ public class DenylistService {
 
         try {
             BuildersKt.runBlocking(
-                    EmptyCoroutineContext.INSTANCE,
-                    (scope, continuation) -> denylistDataSource.addCall(denylistItem, date.toString(), continuation)
+                EmptyCoroutineContext.INSTANCE,
+                (scope, continuation) -> denylistDataSource.addCall(denylistItem, date, continuation)
             );
 
             EventUtils.postEvent(new BlacklistItemChangedEvent());
@@ -102,8 +102,8 @@ public class DenylistService {
     public void delete(Iterable<Long> keys) {
         try {
             BuildersKt.runBlocking(
-                    EmptyCoroutineContext.INSTANCE,
-                    (scope, continuation) -> denylistDataSource.delete(keys.iterator(), continuation)
+                EmptyCoroutineContext.INSTANCE,
+                (scope, continuation) -> denylistDataSource.delete(keys.iterator(), continuation)
             );
 
             blacklistChanged(false);
@@ -113,12 +113,17 @@ public class DenylistService {
     }
 
     private void sanitize(DenylistItem denylistItem) {
-        final String creationDate = denylistItem.getCreationDate().isEmpty() ? new Date().toString() : denylistItem.getCreationDate();
         final long numberOfCalls = denylistItem.getNumberOfCalls() < 0 ? 0 : denylistItem.getNumberOfCalls();
         try {
             BuildersKt.runBlocking(
-                    EmptyCoroutineContext.INSTANCE,
-                    (scope, continuation) -> denylistDataSource.sanitize(denylistItem, !BlacklistUtils.isValidPattern(denylistItem.getPattern()), creationDate, numberOfCalls, continuation)
+                EmptyCoroutineContext.INSTANCE,
+                (scope, continuation) -> denylistDataSource.sanitize(
+                    denylistItem,
+                    !BlacklistUtils.isValidPattern(denylistItem.getPattern()),
+                    denylistItem.getCreationDate(),
+                    numberOfCalls,
+                    continuation
+                )
             );
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

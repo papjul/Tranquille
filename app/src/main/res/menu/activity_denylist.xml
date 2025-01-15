@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_block_denylisted"
+        android:checkable="true"
+        android:onClick="onBlockDenylistedChanged"
+        android:title="@string/block_blacklisted_short" />
+
+    <item
+        android:onClick="onExportDenylistClicked"
+        android:title="@string/blacklist_export" />
+
+    <item
+        android:onClick="onImportDenylistClicked"
+        android:title="@string/blacklist_import" />
+
+</menu>

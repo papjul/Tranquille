@@ -1,5 +1,7 @@
 package fr.vinetos.tranquille.presentation.denylist
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,12 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import fr.vinetos.tranquille.R
-import fr.vinetos.tranquille.domain.service.DenylistService
 import fr.vinetos.tranquille.data.BlacklistUtils
 import fr.vinetos.tranquille.data.DenylistItem
 import fr.vinetos.tranquille.data.YacbHolder
-import java.time.ZonedDateTime
-import java.util.Date
+import fr.vinetos.tranquille.domain.service.DenylistService
+
 
 class EditDenylistItemActivity : AppCompatActivity() {
 
@@ -29,10 +30,9 @@ class EditDenylistItemActivity : AppCompatActivity() {
     // todo: This activity is called when creating a deny list and when editing a deny list item.
     // Change title by title_add_blacklist_item_activity or title_edit_blacklist_item_activity
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_blacklist_item)
+        setContentView(R.layout.activity_edit_denylist_item)
 
         nameTextLayout = findViewById(R.id.nameTextField)
         nameTextLayout.markRequired()
@@ -65,7 +65,7 @@ class EditDenylistItemActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.activity_edit_blacklist_item, menu)
+        menuInflater.inflate(R.menu.activity_edit_denylist_item, menu)
 
         if (denylistItem == null) {
             menu?.findItem(R.id.menu_delete)?.isVisible = false
@@ -126,6 +126,25 @@ class EditDenylistItemActivity : AppCompatActivity() {
      */
     private fun TextInputLayout.markRequired() {
         hint = "$hint *"
+    }
+
+    companion object {
+        private const val PARAM_ITEM_ID: String = "itemId"
+        private const val PARAM_NAME: String = "itemName"
+        private const val PARAM_NUMBER_PATTERN: String = "numberPattern"
+
+        fun getIntent(context: Context?, itemId: Long): Intent {
+            val intent = Intent(context, EditDenylistItemActivity::class.java)
+            intent.putExtra(PARAM_ITEM_ID, itemId)
+            return intent
+        }
+
+        fun getIntent(context: Context?, name: String?, numberPattern: String?): Intent {
+            val intent = Intent(context, EditDenylistItemActivity::class.java)
+            intent.putExtra(PARAM_NAME, name)
+            intent.putExtra(PARAM_NUMBER_PATTERN, numberPattern)
+            return intent
+        }
     }
 
 }

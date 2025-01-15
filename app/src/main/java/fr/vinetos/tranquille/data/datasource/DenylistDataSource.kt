@@ -4,6 +4,7 @@ import fr.vinetos.tranquille.data.Database
 import fr.vinetos.tranquille.data.DenylistItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.Date
 
 class DenylistDataSource(
     db: Database
@@ -32,8 +33,8 @@ class DenylistDataSource(
         return queries.selectAll().executeAsList()
     }
 
-    fun getFirstMatch(number: String): DenylistItem {
-        throw NotImplementedError("Not implemented")
+    fun getFirstMatch(number: String): DenylistItem? {
+        return queries.getMatches(number).executeAsList().getOrNull(0)
     }
 
     fun countValid(): Int {
@@ -67,7 +68,7 @@ class DenylistDataSource(
         }
     }
 
-    suspend fun addCall(denylistItem: DenylistItem, lastCallDate: String) {
+    suspend fun addCall(denylistItem: DenylistItem, lastCallDate: Date) {
         withContext(Dispatchers.IO) {
             queries.addCall(
                 lastCallDate, denylistItem.id
@@ -84,11 +85,11 @@ class DenylistDataSource(
     }
 
     suspend fun sanitize(
-        denylistItem: DenylistItem, invalid: Boolean, creationDate: String, numberOfCalls: Long
+        denylistItem: DenylistItem, invalid: Boolean, creationDate: Date, numberOfCalls: Long
     ) {
         withContext(Dispatchers.IO) {
             queries.sanitize(
-                if (invalid) 1 else 0, creationDate, numberOfCalls, denylistItem.id
+                invalid, creationDate, numberOfCalls, denylistItem.id
             )
         }
     }

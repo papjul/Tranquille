@@ -144,14 +144,14 @@ public class Settings extends GenericSettings {
     }
 
     public boolean getBlacklistEnabled() {
-        return getBlockBlacklisted() && getBlacklistIsNotEmpty();
+        return getBlockDenylisted() && getBlacklistIsNotEmpty();
     }
 
-    public boolean getBlockBlacklisted() {
+    public boolean getBlockDenylisted() {
         return getBoolean(PREF_BLOCK_BLACKLISTED, true);
     }
 
-    public void setBlockBlacklisted(boolean block) {
+    public void setBlockDenylisted(boolean block) {
         setBoolean(PREF_BLOCK_BLACKLISTED, block);
     }
 
