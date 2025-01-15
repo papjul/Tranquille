@@ -28,6 +28,6 @@ Il database principale dei numeri di telefono viene scaricato una<a href="https:
 Non vengono inviate informazioni di identificazione utente (ad eccezione del numero di telefono
 le recensioni dettagliate sono caricate).
 
-Yet Another Call Blocker è ancora in fase di sviluppo. Qualsiasi aiuto è benvenuto.
+Tranquille è ancora in fase di sviluppo. Qualsiasi aiuto è benvenuto.
 
 ''NonFreeNet:'' il servizio di terze parti non è open source.
