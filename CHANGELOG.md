@@ -5,7 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
-## [Unreleased]
+## [UNRELEASED]
+
+- Added icon to en-US fastlane metadata
+- Fixed fastlane folder names for language nb-NO
+- Fixed fastlane folder names for language pt-BR
+- Fixed gradle-wrapper version mismatch
+- Pinned gradle to `8.4-all` with related SHA256 Sum
+- Update Android Gradle Plugin to 8.3.1
+- Fixed deprecated `android.defaults.buildfeatures.buildconfig=true` build option
 
 ### Added
 
@@ -25,6 +33,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Updated Italian translation of the app description thanks to Translator-3000.
 - Updated Italian translation thanks to Iginio Massari ([@darthmassari](https://hosted.weblate.org/user/darthmassari/)).
 - Updated German translation thanks to Ettore Atalan ([@Atalanttore](https://hosted.weblate.org/user/Atalanttore/)).
+
+
+## [0.0.1] - 2024-03-25
+
+The project has not been updated from the previous maintainer since 2021.
+As I use this app a lot, I will continue to update and distribute this app.
+I am not an Android Expert but I will do my best !
+
+Cheers
+
+- Rename the app to Tranquille
+- Switch to Gradle Kotlin
+- Update Android Gradle Plugin to 8.3.0
+- Add support for Kotlin
+- Add .gitlab-ci.yml
+- Fix some warnings and Manifest
+- Update core dependencies to latest version
+- Update all libs to latest version
+- Do the upgrade path to target Android 14 and do very basic tests
+- Bump version
 
 
 ## [0.5.17] - 2021-11-13
@@ -151,7 +179,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Changed blocking behavior in Direct Boot mode: blacklisted numbers are not blocked by default.  
+- Changed blocking behavior in Direct Boot mode: blacklisted numbers are not blocked by default.
   See #22 for details.
 - \[Internal\] Settings refactoring.
 - Updated Croatian translation thanks to Milo Ivir (@milotype).
@@ -163,7 +191,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- `ID` and `numberOfCalls` are now optional fields for blacklist import (`pattern` is the only required field now).  
+- `ID` and `numberOfCalls` are now optional fields for blacklist import (`pattern` is the only required field now).
   Fields after `pattern` may be omitted.
 - Updated French and Italian translations thanks to J. Lavoie ([@Edanas](https://hosted.weblate.org/user/Edanas/)).
 - Updated Croatian translation thanks to Milo Ivir (@milotype).
@@ -255,7 +283,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- Improved hidden number detection in "normal" (non-"advanced") mode (#2).  
+- Improved hidden number detection in "normal" (non-"advanced") mode (#2).
   The feature is no longer considered experimental.
 - Auto-hide "blocked call" notifications (when tapped).
 - Fallback to standard TLS-stack if Conscrypt can't be loaded.
@@ -302,7 +330,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-- Yet Another Call Blocker [can be translated on Weblate](https://hosted.weblate.org/engage/yet-another-call-blocker/).
+- Tranquille [can be translated on Weblate](https://hosted.weblate.org/engage/yet-another-call-blocker/).
 
 ### Changed
 
